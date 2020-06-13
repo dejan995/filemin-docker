@@ -1,6 +1,6 @@
 version: '3.5'
 services: 
-    smb-webmin:
+    filemin:
         build:
             context: . 
         container_name: ${CONTAINER_NAME_FILEMIN}
