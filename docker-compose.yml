@@ -3,10 +3,10 @@ services:
     smb-webmin:
         build:
             context: . 
-        container_name: ${CONTAINER_NAME_SAMBA}
+        container_name: ${CONTAINER_NAME_FILEMIN}
         restart: unless-stopped
         image: filemin:latest
         ports:
-            - ${SAMBA_WEBUI_PORT}:10000
+            - ${FILEMIN_WEBUI_PORT}:10000
         volumes: 
             - ${ROOT_SHARE_FOLDER}:/srv
