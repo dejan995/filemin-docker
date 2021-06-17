@@ -21,7 +21,7 @@ stages:
       displayName: 'Build the Docker image'
       inputs:
         containerRegistry: 'Docker Hub'
-        repository: 'filemin-docker'
+        repository: 'dejan995/filemin-docker'
         command: 'build'
         Dockerfile: '**/Dockerfile'
         buildContext: '.'
@@ -29,6 +29,6 @@ stages:
       displayName: 'Push the Docker image to Dockerhub'
       inputs:
         containerRegistry: 'Docker Hub'
-        repository: 'filemin-docker'
+        repository: 'dejan995/filemin-docker'
         command: 'push'
       condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) 
