@@ -20,11 +20,8 @@ stages:
     - task: Docker@2
       displayName: 'Build the Docker image'
       inputs:
-        containerregistrytype: 'Container Registry'
-        dockerRegistryEndpoint: 'Docker Hub'
-        command: 'Build an image'
-        dockerFile: '**/Dockerfile'
-        imageName: '$(ImageName)'
-        includeLatestTag: true
-        useDefaultContext: false
+        containerRegistry: 'Docker Hub'
+        repository: 'filemin-docker'
+        command: 'build'
+        Dockerfile: '**/Dockerfile'
         buildContext: '.'
