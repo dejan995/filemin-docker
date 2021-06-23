@@ -25,7 +25,7 @@ ENV nochown=true
 RUN  /opt/webmin/setup.sh && \
      chmod +x entrypoint.sh
 
-VOLUME [ "/srv" ]
+VOLUME [ "/mnt" ]
 
 EXPOSE 10000
 

@@ -9,4 +9,4 @@ services:
         ports:
             - ${FILEMIN_WEBUI_PORT}:10000
         volumes: 
-            - ${ROOT_SHARE_FOLDER}:/srv
+            - ${ROOT_SHARE_FOLDER}:/mnt
