@@ -10,3 +10,5 @@ services:
             - ${FILEMIN_WEBUI_PORT}:10000
         volumes: 
             - ${ROOT_SHARE_FOLDER}:/mnt
+        environment: 
+            - WEBMIN_PASSWORD=${WEBMIN_PASSWORD}
