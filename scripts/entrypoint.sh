@@ -3,7 +3,7 @@
 export WEBMIN_PASSWORD="${WEBMIN_PASSWORD:-admin}"
 export USE_SSL="${USE_SSL:-true}"
 export BASE_URL="${BASE_URL:-localhost}"
-export ALLOW_ONLY_SAMBA_RELATED_MODULES="${ALLOW_ONLY_SAMBA_RELATED_MODULES:-true}"
+export ALLOW_ONLY_FILEMIN_RELATED_MODULES="${ALLOW_ONLY_FILEMIN_RELATED_MODULES:-true}"
 
 if [ "${USE_SSL,,}" = true ] && [ -n "${BASE_URL+x}" ]; then
     sed -i 's/ssl=/ssl=1/g' /etc/webmin/miniserv.conf
@@ -17,13 +17,19 @@ if [ "${USE_SSL,,}" = true ] && [ -n "${BASE_URL+x}" ]; then
     fi
 fi
 
-if [ "${ALLOW_ONLY_SAMBA_RELATED_MODULES,,}" = true ]; then
+if [ "${ALLOW_ONLY_FILEMIN_RELATED_MODULES,,}" = true ]; then
     echo "admin: filemin system-status backup-config changeuser webminlog webmin acl mount" >  /etc/webmin/webmin.acl
 fi
 
 if [ ! "${WEBMIN_PASSWORD}" = "admin" ];then
     echo "Changing password for admin"
     /opt/webmin/changepass.pl /etc/webmin admin ${WEBMIN_PASSWORD}
+fi
+
+if [ ! -d "/data" ]; then
+  ln -s /etc/webmin/* /data/webmin
+elif [ -z "$(ls -A /data)" ]; then
+  cp -a /etc/webmin/. /data/webmin/
 fi
 
 exec "$@"

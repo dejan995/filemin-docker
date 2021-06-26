@@ -8,7 +8,8 @@ services:
         image: filemin:latest
         ports:
             - ${FILEMIN_WEBUI_PORT}:10000
-        volumes: 
+        volumes:
+            - ${FILEMIN_CONFIG}:/data
             - ${ROOT_SHARE_FOLDER}:/mnt
         environment: 
             - WEBMIN_PASSWORD=${WEBMIN_PASSWORD}
