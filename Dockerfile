@@ -21,7 +21,11 @@ RUN apt update && apt install -y curl tar perl libnet-ssleay-perl libauthen-pam-
     ln -s /dev/stdout /var/webmin/miniserv.log && \
     ln -s /dev/stderr /var/webmin/miniserv.error && \
     /opt/webmin/setup.sh && \
-    chmod +x entrypoint.sh
+    chmod +x entrypoint.sh && \
+    apt autoremove --purge && \
+    apt autoremove && \
+    apt clean && \
+    rm -rf /var/lib/apt
 
 VOLUME /mnt /data
 
