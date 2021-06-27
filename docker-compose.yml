@@ -11,5 +11,6 @@ services:
         volumes:
             - ${FILEMIN_CONFIG}:/data
             - ${ROOT_SHARE_FOLDER}:/mnt
-        environment: 
+        environment:
+            - WEBMIN_LOGIN=${WEBMIN_LOGIN}  
             - WEBMIN_PASSWORD=${WEBMIN_PASSWORD}
