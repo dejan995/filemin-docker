@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 export WEBMIN_LOGIN="${WEBMIN_LOGIN:-admin}"
 export WEBMIN_PASSWORD="${WEBMIN_PASSWORD:-admin}"
