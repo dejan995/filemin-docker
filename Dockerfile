@@ -13,7 +13,7 @@ ENV nochown=true
 COPY /scripts/entrypoint.sh /
 COPY /scripts/supervisord.conf /
 
-RUN apk add --no-cache perl-net-ssleay curl tar perl expect tzdata supervisor && \
+RUN apk add --no-cache bash perl-net-ssleay curl tar perl expect tzdata supervisor && \
     mkdir /opt/webmin && curl -sSL https://sourceforge.net/projects/webadmin/files/webmin/${WEBMIN_VERSION}/webmin-${WEBMIN_VERSION}.tar.gz/download | tar xz -C /opt/webmin --strip-components=1 && \
     mkdir -p /var/webmin/ && \
     mkdir -p /srv/ && \
@@ -27,6 +27,6 @@ VOLUME /mnt /data
 
 EXPOSE 10000
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash","/entrypoint.sh"]
 
 CMD ["/usr/bin/supervisord","-c","/supervisord.conf"]
