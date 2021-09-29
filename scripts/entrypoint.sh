@@ -17,7 +17,6 @@ if [ "${USE_SSL,,}" = true ] && [ -n "${BASE_URL+x}" ]; then
         rm -rf $tempdir
     fi
 fi
-
 if [ "${ALLOW_ONLY_FILEMIN_RELATED_MODULES,,}" = true ]; then
     echo "admin: filemin system-status backup-config changeuser webminlog webmin acl mount" >  /etc/webmin/webmin.acl
 fi
