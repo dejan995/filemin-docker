@@ -1,6 +1,5 @@
-FROM ubuntu:focal
+FROM alpine:latest
 
-ENV DEBIAN_FRONTEND noninteractive
 ENV WEBMIN_VERSION 1.981
 ENV nostart=true
 ENV nouninstall=true
@@ -14,7 +13,7 @@ ENV nochown=true
 COPY /scripts/entrypoint.sh /
 COPY /scripts/supervisord.conf /
 
-RUN apt update && apt install -y curl tar perl libnet-ssleay-perl libauthen-pam-perl expect tzdata supervisor && \
+RUN apk add --no-cache perl-net-ssleay curl tar perl expect tzdata supervisor && \
     mkdir /opt/webmin && curl -sSL https://sourceforge.net/projects/webadmin/files/webmin/${WEBMIN_VERSION}/webmin-${WEBMIN_VERSION}.tar.gz/download | tar xz -C /opt/webmin --strip-components=1 && \
     mkdir -p /var/webmin/ && \
     mkdir -p /srv/ && \
