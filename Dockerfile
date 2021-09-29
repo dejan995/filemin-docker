@@ -27,6 +27,6 @@ VOLUME /mnt /data
 
 EXPOSE 10000
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["sh","/entrypoint.sh"]
 
 CMD ["/usr/bin/supervisord","-c","/supervisord.conf"]
