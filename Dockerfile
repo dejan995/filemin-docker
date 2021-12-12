@@ -1,5 +1,6 @@
-FROM alpine:latest
+FROM ubuntu:focal
 
+ENV DEBIAN_FRONTEND noninteractive
 ENV WEBMIN_VERSION 1.983
 ENV nostart=true
 ENV nouninstall=true
@@ -13,7 +14,7 @@ ENV nochown=true
 COPY /scripts/entrypoint.sh /
 COPY /scripts/supervisord.conf /
 
-RUN apk add --no-cache bash perl-net-ssleay curl tar perl expect tzdata supervisor && \
+RUN apt update && apt install -y curl tar perl libnet-ssleay-perl libauthen-pam-perl expect tzdata supervisor && \
     mkdir /opt/webmin && curl -sSL https://sourceforge.net/projects/webadmin/files/webmin/${WEBMIN_VERSION}/webmin-${WEBMIN_VERSION}.tar.gz/download | tar xz -C /opt/webmin --strip-components=1 && \
     mkdir -p /var/webmin/ && \
     mkdir -p /srv/ && \
@@ -21,12 +22,15 @@ RUN apk add --no-cache bash perl-net-ssleay curl tar perl expect tzdata supervis
     ln -s /dev/stderr /var/webmin/miniserv.error && \
     /opt/webmin/setup.sh && \
     chmod +x entrypoint.sh && \
-    rm -rf /var/cache/apk/*
+    apt autoremove --purge && \
+    apt autoremove && \
+    apt clean && \
+    rm -rf /var/lib/apt
 
 VOLUME /mnt /data
 
 EXPOSE 10000
 
-ENTRYPOINT ["/bin/bash","/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["/usr/bin/supervisord","-c","/supervisord.conf"]
