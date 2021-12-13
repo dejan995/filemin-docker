@@ -11,11 +11,13 @@ variables:
   ImageName: 'filemin-docker'
 
 steps:
-- task: Docker@2
-  displayName: Login
+
+- task: Docker@1
   inputs:
-    containerRegistry: 'Docker Hub'
+    containerregistrytype: 'Container Registry'
+    dockerRegistryEndpoint: 'Docker Hub'
     command: 'login'
+
 - task: CmdLine@2
   displayName: Build
   inputs:
