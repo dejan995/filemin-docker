@@ -1,4 +1,4 @@
-name : Docker-CI
+name : $(Date:ddMMyyyy)$(Rev:.rr)
 trigger:
   branches:
     include:
