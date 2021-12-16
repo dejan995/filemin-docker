@@ -25,7 +25,6 @@ pipeline {
       steps {
         sh '''docker run --privileged --rm tonistiigi/binfmt --install amd64
               docker run --privileged --rm tonistiigi/binfmt
-              docker buildx rm filemin
               docker buildx create --name filemin --use filemin
               docker buildx build --platform linux/amd64,linux/arm64 \\
                 -t dejan995/filemin-docker:$BUILD_NUMBER \\
