@@ -25,7 +25,7 @@ pipeline {
       steps {
         sh '''docker run --privileged --rm tonistiigi/binfmt --install amd64
               docker run --privileged --rm tonistiigi/binfmt
-              docker buildx create --name filemin-docker --use filemin-docker
+              docker buildx create --name nginx --use nginx
               docker buildx build --platform linux/amd64,linux/arm64 \\
                 -t dejan995/filemin-docker:$BUILD_NUMBER \\
                 -t dejan995/filemin-docker:latest \\
