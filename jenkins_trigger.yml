@@ -1,0 +1,10 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: curl -u $(username):$(password) https://jenkins.dapmn.com/job/myproject/build?token=anytoken
+  displayName: 'Run a one-line script'
+
