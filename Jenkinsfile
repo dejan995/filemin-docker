@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Cloning Git') {
+    stage('Get Code and Login to Docker') {
       parallel {
         stage('Cloning Git') {
           steps {
