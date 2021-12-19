@@ -24,7 +24,7 @@ pipeline {
     stage('Build & Deploy Image') {
       steps {
         sh '''docker buildx build --platform linux/amd64,linux/arm64 \\
-                -t $DOCKER_IMAGE:$BUILD_DATE_FORMATTED.$BUILDS_TODAY \\
+                -t $DOCKER_IMAGE:$BUILD_VERSION \\
                 -t $DOCKER_IMAGE:latest \\
               --push \\
               .'''
@@ -34,5 +34,6 @@ pipeline {
   }
   environment {
     DOCKER_IMAGE = 'dejan995/filemin-docker'
+    BUILD_VERSION = '${BUILD_DATE_FORMATTED, "yyyyMMdd"}.${BUILDS_TODAY, XX}'
   }
 }
