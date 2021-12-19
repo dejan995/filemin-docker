@@ -23,9 +23,7 @@ pipeline {
 
     stage('Build & Deploy Image') {
       steps {
-        sh '''docker run --privileged --rm tonistiigi/binfmt --install amd64
-              docker run --privileged --rm tonistiigi/binfmt
-              docker buildx build --platform linux/amd64,linux/arm64 \\
+        sh '''docker buildx build --platform linux/amd64,linux/arm64 \\
                 -t dejan995/filemin-docker:$BUILD_NUMBER \\
                 -t dejan995/filemin-docker:latest \\
               --push \\
