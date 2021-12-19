@@ -34,6 +34,9 @@ pipeline {
   }
   environment {
     DOCKER_IMAGE = 'dejan995/filemin-docker'
-    BUILD_VERSION = '${BUILD_DATE_FORMATTED, "yyyyMMdd"}.${BUILDS_TODAY, XX}'
+    BUILD_VERSION = VersionNumber(
+        versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMdd"}.${BUILDS_TODAY, XX}',
+        projectStartDate:    '1970-01-01',
+        skipFailedBuilds:    true)
   }
 }
