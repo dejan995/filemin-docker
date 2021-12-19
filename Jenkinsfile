@@ -1,5 +1,7 @@
 pipeline {
+
   agent any
+
   stages {
     stage('Get Code and Login to Docker') {
       parallel {
@@ -31,6 +33,11 @@ pipeline {
       }
     }
 
+    stage('Clean up system') {
+      steps {
+        sh 'docker buildx prune -a'
+      }
+    }
   }
   environment {
     DOCKER_IMAGE = 'dejan995/filemin-docker'
