@@ -35,7 +35,7 @@ pipeline {
 
     stage('Clean up system') {
       steps {
-        sh 'docker buildx prune -a'
+        sh 'yes | docker buildx prune -a'
       }
     }
   }
