@@ -8,8 +8,13 @@ trigger:
 
 pool:
   vmImage: windows-latest
-
+ 
 steps:
+- task: CmdLine@2
+  inputs:
+    script: |
+      git config --global user.name "Dejan Petrov"
+      git config --global user.email "dejan.petrov@dapmn.com"
 - task: gitsync@1
   inputs:
     GitRepoUrl: 'https://dejan:$(MYPAT)@gitlab.dapmn.com/dejan/filemin-docker.git'
