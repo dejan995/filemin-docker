@@ -23,9 +23,11 @@ jobs:
     - task: gitsync@1
       inputs:
        GitRepoUrl: 'https://dejan:$(MYPATGITLAB)@gitlab.dapmn.com/dejan/filemin-docker.git'
+    dependsOn: Git_Credentials
 
   - job: Sync_GitHub
     steps:
     - task: gitsync@1
       inputs:
        GitRepoUrl: 'https://$(MYPAT)@github.com/dejan995/filemin-docker.git'
+    dependsOn: Sync_GitLab
