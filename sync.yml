@@ -15,19 +15,19 @@ jobs:
     - task: CmdLine@2
       inputs:
        script: |
-        git config --global user.name "Dejan Petrov"
-        git config --global user.email "dejan.petrov@dapmn.com"
+        git config --global user.name "$(NAME)"
+        git config --global user.email "$(EMAIL)"
 
   - job: Sync_GitLab
     steps:
     - task: gitsync@1
       inputs:
-       GitRepoUrl: 'https://dejan:$(MYPATGITLAB)@gitlab.dapmn.com/dejan/filemin-docker.git'
+       GitRepoUrl: 'https://dejan:$(MYPATGITLAB)@$(GITLAB_HOST)/$(GITLAB_USER)/filemin-docker.git'
     dependsOn: Git_Credentials
 
   - job: Sync_GitHub
     steps:
     - task: gitsync@1
       inputs:
-       GitRepoUrl: 'https://$(MYPAT)@github.com/dejan995/filemin-docker.git'
+       GitRepoUrl: 'https://$(MYPATGITHUB)@github.com/dejan995/filemin-docker.git'
     dependsOn: Sync_GitLab
