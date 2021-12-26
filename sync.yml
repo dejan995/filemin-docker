@@ -13,3 +13,6 @@ steps:
 - task: gitsync@1
   inputs:
     GitRepoUrl: 'https://$(MYPAT)@github.com/dejan995/filemin-docker.git'
+- task: gitsync@1
+  inputs:
+    GitRepoUrl: 'https://$(MYPAT1)@gitlab.dapmn.com/dejan/filemin-docker.git'
