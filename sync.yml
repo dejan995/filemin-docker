@@ -10,7 +10,7 @@ pool:
   vmImage: windows-latest
 
 jobs:
-  - job: Git Credentials
+  - job: Git_Credentials
     steps:
     - task: CmdLine@2
       inputs:
@@ -18,13 +18,13 @@ jobs:
         git config --global user.name "Dejan Petrov"
         git config --global user.email "dejan.petrov@dapmn.com"
 
-  - job: Sync GitLab
+  - job: Sync_GitLab
     steps:
     - task: gitsync@1
       inputs:
        GitRepoUrl: 'https://dejan:$(MYPATGITLAB)@gitlab.dapmn.com/dejan/filemin-docker.git'
 
-  - job: Sync GitHub
+  - job: Sync_GitHub
     steps:
     - task: gitsync@1
       inputs:
