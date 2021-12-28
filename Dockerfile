@@ -1,20 +1,14 @@
 FROM ubuntu:focal
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV nostart=true
-ENV nouninstall=true
-ENV noportcheck=true
-ENV ssl=0
-ENV login=admin
-ENV password=admin
-ENV atboot=false
-ENV nochown=true
 
 COPY /scripts/entrypoint.sh /
 COPY /scripts/supervisord.conf /
 
 RUN echo "##### Installing Requierments #####" && \
     apt update && apt install --no-install-recommends -y curl tar perl libnet-ssleay-perl libauthen-pam-perl expect tzdata supervisor jq && \
+    echo "##### Setting curl Cetificates #####" && \
+    export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt && \
     echo "##### Getting Latest Version of Webmin #####" && \
     export latestVer=$(curl -sL https://api.github.com/repos/webmin/webmin/releases/latest | jq -r ".tag_name") && \
     echo "##### Downloading Webmin #####" && \
