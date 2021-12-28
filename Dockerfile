@@ -14,8 +14,9 @@ ENV nochown=true
 COPY /scripts/entrypoint.sh /
 COPY /scripts/supervisord.conf /
 
-RUN apt update && apt install -y curl tar perl libnet-ssleay-perl libauthen-pam-perl expect tzdata supervisor && \
-    mkdir /opt/webmin && curl -sSL https://sourceforge.net/projects/webadmin/files/webmin/${WEBMIN_VERSION}/webmin-${WEBMIN_VERSION}.tar.gz/download | tar xz -C /opt/webmin --strip-components=1 && \
+RUN apt update && apt install -y curl tar perl libnet-ssleay-perl libauthen-pam-perl expect tzdata supervisor jq && \
+    export latestVer=$(curl -sL https://api.github.com/repos/webmin/webmin/releases/latest | jq -r ".tag_name") && \
+    mkdir /opt/webmin && curl -sSL https://sourceforge.net/projects/webadmin/files/webmin/${latestVer}/webmin-${latestVer}.tar.gz/download | tar xz -C /opt/webmin --strip-components=1 && \
     mkdir -p /var/webmin/ && \
     mkdir -p /srv/ && \
     ln -s /dev/stdout /var/webmin/miniserv.log && \
