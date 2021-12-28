@@ -1,15 +1,6 @@
 FROM ubuntu:focal
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV WEBMIN_VERSION 1.983
-ENV nostart=true
-ENV nouninstall=true
-ENV noportcheck=true
-ENV ssl=0
-ENV login=admin
-ENV password=admin
-ENV atboot=false
-ENV nochown=true
 
 COPY /scripts/entrypoint.sh /
 COPY /scripts/supervisord.conf /
