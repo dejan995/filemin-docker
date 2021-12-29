@@ -24,9 +24,14 @@ fi
 
 if [ ! "${WEBMIN_LOGIN}" = "admin" ];then
     echo "${WEBMIN_LOGIN}:${WEBMIN_PASSWORD}" >  /etc/webmin/miniserv.users
+  else
+    echo "${WEBMIN_LOGIN}:${WEBMIN_PASSWORD}" >  /etc/webmin/miniserv.users
 fi
 
 if [ ! "${WEBMIN_PASSWORD}" = "admin" ];then
+    echo "Changing password for user ${WEBMIN_LOGIN}"
+    /opt/webmin/changepass.pl /etc/webmin ${WEBMIN_LOGIN} ${WEBMIN_PASSWORD}
+  else
     echo "Changing password for user ${WEBMIN_LOGIN}"
     /opt/webmin/changepass.pl /etc/webmin ${WEBMIN_LOGIN} ${WEBMIN_PASSWORD}
 fi
