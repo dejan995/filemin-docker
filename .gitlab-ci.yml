@@ -13,9 +13,13 @@ variables:
 
 stages:
   - Build & Push Docker Image
+  - Test Docker Image
+  - Rollback Docker Image
 
 Build & Push Docker Image:
   stage: Build & Push Docker Image
+  only: ["master"]
+  when: always
   script:
     - export VERSION=$(date +%y.%m.%d)
     - export IMAGE_NAME=dejan995/filemin-docker
@@ -28,5 +32,19 @@ Build & Push Docker Image:
       --push
       .
 
-  only:
-    - master
+Test Docker Image:
+  stage: Test Docker Image
+  image: dejan995/ubuntu-dind:latest
+  when: on_success
+  script:
+    - chmod +x test-image.sh
+    - ./test-image.sh
+
+Rollback Docker Image:
+  stage: Rollback Docker Image
+  image: dejan995/ubuntu-dind:latest
+  needs: ["Test Docker Image"]
+  when: on_failure
+  script:
+    - echo 'Rolling back docker image'
+
