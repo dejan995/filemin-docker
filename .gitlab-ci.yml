@@ -12,22 +12,7 @@ variables:
   DOCKER_TLS_CERTDIR: ""
 
 stages:
-  - Test Docker Image
   - Build & Push Docker Image
-  - Rollback Docker Image
-
-Test Docker Image:
-  stage: Test Docker Image
-  image: dejan995/ubuntu-dind:latest
-  when: on_success
-  script:
-    - apt install iproute2 -y
-    - docker run -d --name filemin -p 3333:10000 dejan995/filemin-docker:latest
-    - wget --no-check-certificate https://admin:admin@localhostt:3333/xmlrpc.cgi
-    - ip address
-    - docker ps
-#    - chmod +x test-image.sh
-#    - ./test-image.sh
 
 Build & Push Docker Image:
   stage: Build & Push Docker Image
@@ -44,12 +29,3 @@ Build & Push Docker Image:
       -t $IMAGE_NAME:latest
       --push
       .
-
-Rollback Docker Image:
-  stage: Rollback Docker Image
-  image: dejan995/ubuntu-dind:latest
-  needs: ["Test Docker Image"]
-  when: on_failure
-  script:
-    - echo 'Rolling back docker image'
-
