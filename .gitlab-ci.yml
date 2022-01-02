@@ -22,6 +22,7 @@ Test Docker Image:
   when: on_success
   script:
     - apt install iproute2 -y
+    - docker run -d --name filemin -p 3333:10000 dejan995/filemin-docker:latest
     - ip address
     - docker ps
 #    - chmod +x test-image.sh
