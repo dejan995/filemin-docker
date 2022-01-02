@@ -12,9 +12,20 @@ variables:
   DOCKER_TLS_CERTDIR: ""
 
 stages:
-  - Build & Push Docker Image
   - Test Docker Image
+  - Build & Push Docker Image
   - Rollback Docker Image
+
+Test Docker Image:
+  stage: Test Docker Image
+  image: dejan995/ubuntu-dind:latest
+  when: on_success
+  script:
+    - apt install iproute2
+    - ip address
+    - docker ps
+#    - chmod +x test-image.sh
+#    - ./test-image.sh
 
 Build & Push Docker Image:
   stage: Build & Push Docker Image
@@ -31,17 +42,6 @@ Build & Push Docker Image:
       -t $IMAGE_NAME:latest
       --push
       .
-
-Test Docker Image:
-  stage: Test Docker Image
-  image: dejan995/ubuntu-dind:latest
-  when: on_success
-  script:
-    - apt install iproute2
-    - ip address
-    - docker ps
-#    - chmod +x test-image.sh
-#    - ./test-image.sh
 
 Rollback Docker Image:
   stage: Rollback Docker Image
