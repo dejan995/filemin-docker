@@ -37,8 +37,10 @@ Test Docker Image:
   image: dejan995/ubuntu-dind:latest
   when: on_success
   script:
-    - chmod +x test-image.sh
-    - ./test-image.sh
+    - ip address
+    - docker ps
+#    - chmod +x test-image.sh
+#    - ./test-image.sh
 
 Rollback Docker Image:
   stage: Rollback Docker Image
