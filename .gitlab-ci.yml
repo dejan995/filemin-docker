@@ -21,7 +21,7 @@ Test Docker Image:
   image: dejan995/ubuntu-dind:latest
   when: on_success
   script:
-    - apt install iproute2
+    - apt install iproute2 -y
     - ip address
     - docker ps
 #    - chmod +x test-image.sh
