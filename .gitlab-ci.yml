@@ -23,6 +23,7 @@ Test Docker Image:
   script:
     - apt install iproute2 -y
     - docker run -d --name filemin -p 3333:10000 dejan995/filemin-docker:latest
+    - wget --no-check-certificate https://admin:admin@$HOSTNAME:3333/xmlrpc.cgi
     - ip address
     - docker ps
 #    - chmod +x test-image.sh
