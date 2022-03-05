@@ -1,4 +1,4 @@
-image: jdrouet/docker-with-buildx:latest-0.5.2
+image: data61/magda-builder-docker:latest
 
 services:
     - name: docker:20.10-dind
