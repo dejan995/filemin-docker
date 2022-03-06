@@ -1,4 +1,4 @@
-image: data61/magda-builder-docker:latest
+image: iceflom/docker-buildx
 
 services:
     - name: docker:20.10-dind
