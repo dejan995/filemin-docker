@@ -1,7 +1,7 @@
 image: iceflom/docker-buildx
 
 services:
-    - name: docker:20.10-dind
+    - name: docker:dind
       entrypoint: ["env", "-u", "DOCKER_HOST"]
       command: ["dockerd-entrypoint.sh"]
       alias: docker
